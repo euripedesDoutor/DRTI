@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://qualidadepereciveis.com.br/Safe/LeitorCarnesWS?wsdl" uri="wsdl/qualidadepereciveis.com.br/Safe/LeitorCarnesWS.wsdl"/>
+    <system systemId="http://qualidadepereciveis.com.br:80/Safe/LeitorCarnesWS?xsd=1" uri="wsdl/qualidadepereciveis.com.br_80/Safe/LeitorCarnesWS.xsd_1.xsd"/>
+</catalog>

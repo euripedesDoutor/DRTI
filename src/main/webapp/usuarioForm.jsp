@@ -1,0 +1,206 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich"%>
+
+<f:view>
+
+    <jsp:include page="loads.jsp"/>
+    <title>
+        <h:outputText value="#{msg_aplic.prt_Usuario_tituloForm}"/>
+    </title>
+
+
+    <h:panelGrid columns="1" width="100%" cellpadding="0" cellspacing="0">
+        <f:facet name="header">
+            <f:verbatim>
+                <jsp:include page="topoReduzido.jsp"/>
+            </f:verbatim>
+        </f:facet>
+
+        <h:form id="form">
+            <h:commandLink action="#{UsuarioControle.liberarBackingBeanMemoria}" id="idLiberarBackingBeanMemoria" style="display: none" />
+            <h:panelGrid columns="1" styleClass="tabconteudo" width="100%">
+                <rich:tabPanel switchType="ajax">
+                    <rich:tab label="Geral">
+                        <h:panelGrid columns="1" styleClass="tabForm" width="100%">
+                            <h:panelGrid columns="2" styleClass="tabConsulta" width="100%">
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg_aplic.prt_Usuario_tituloForm}"/>
+                                </f:facet>
+
+                                <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Usuario_username}" />
+                                <h:panelGroup>
+                                    <h:inputText  id="username" size="10" maxlength="10" styleClass="camposObrigatorios" value="#{UsuarioControle.usuarioVO.username}" />
+                                </h:panelGroup>
+                                <h:outputText value=""/>
+                                <a4j:commandButton ignoreDupResponses="true" id="resetarSenha" rendered="#{UsuarioControle.mostrarBotaoResetarSenha}" action="#{UsuarioControle.resetarSenha}" styleClass="botoes" value="#{msg_bt.btn_resetarSenhaUsuario}" reRender="form"/>
+
+                                <h:outputText styleClass="tituloCampos" value="#{msg_aplic.prt_Usuario_nome}" />
+                                <h:inputText id="nome" size="57" onkeypress="autoTab(this, event);" styleClass="camposObrigatorio" value="#{UsuarioControle.usuarioVO.nome}" />
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="1" width="100%" headerClass="subordinado" columnClasses="colunaCentralizada">
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg_aplic.prt_UsuarioPerfilAcesso_tituloForm}"/>
+                                </f:facet>
+                                <h:panelGrid columns="2" width="100%" styleClass="tabFormSubordinada" footerClass="colunaCentralizada">
+                                    <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_UsuarioPerfilAcesso_empresa}" />
+                                    <h:panelGroup>
+                                        <h:selectOneMenu  id="empresa" styleClass="camposObrigatorios" value="#{UsuarioControle.usuarioPerfilAcessoVO.empresa.codigo}" >
+                                            <f:selectItems  value="#{UsuarioControle.listaSelectItemEmpresa}" />
+                                        </h:selectOneMenu>
+                                        <a4j:commandButton ignoreDupResponses="true" id="atualizar_empresa" action="#{UsuarioControle.montarListaSelectItemEmpresa}" image="imagens/atualizar.png" immediate="true" ajaxSingle="true" reRender="form:empresa"/>
+                                        <h:message for="empresa" styleClass="mensagemDetalhada"/>
+                                    </h:panelGroup>
+                                    <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_UsuarioPerfilAcesso_codPerfilAcesso}" />
+                                    <h:panelGroup>
+                                        <h:selectOneMenu  id="codPerfilAcesso" styleClass="camposObrigatorios" value="#{UsuarioControle.usuarioPerfilAcessoVO.perfilAcesso.codigo}" >
+                                            <f:selectItems  value="#{UsuarioControle.listaSelectItemCodPerfilAcesso}" />
+                                        </h:selectOneMenu>
+                                        <a4j:commandButton ignoreDupResponses="true" id="atualizar_codPerfilAcesso" action="#{UsuarioControle.montarListaSelectItemCodPerfilAcesso}" image="imagens/atualizar.png" immediate="true" ajaxSingle="true" reRender="form:codPerfilAcesso"/>
+                                        <h:message for="codPerfilAcesso" styleClass="mensagemDetalhada"/>
+                                    </h:panelGroup>
+                                </h:panelGrid>
+                                <h:commandButton action="#{UsuarioControle.adicionarUsuarioPerfilAcesso}" value="#{msg_bt.btn_adicionar}" accesskey="5" styleClass="botoes"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="1" width="100%" styleClass="tabFormSubordinada">
+                                <h:dataTable id="usuarioPerfilAcessoVO" width="100%" headerClass="subordinado" styleClass="tabFormSubordinada"
+                                             rowClasses="linhaImparSubordinado, linhaParSubordinado" columnClasses="colunaAlinhamento"
+                                             value="#{UsuarioControle.usuarioVO.usuarioPerfilAcessoVOs}" var="usuarioPerfilAcesso">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="#{msg_aplic.prt_UsuarioPerfilAcesso_empresa}" />
+                                        </f:facet>
+                                        <h:outputText  value="#{usuarioPerfilAcesso.empresa.nomeFantasia}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="#{msg_aplic.prt_UsuarioPerfilAcesso_codPerfilAcesso}" />
+                                        </f:facet>
+                                        <h:outputText  value="#{usuarioPerfilAcesso.perfilAcesso.nome}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="#{msg_bt.btn_opcoes}" />
+                                        </f:facet>
+                                        <h:panelGroup>
+                                            <h:commandButton id="editarUsuarioPerfilAcesso" immediate="true" action="#{UsuarioControle.editarUsuarioPerfilAcesso}" value="#{msg_bt.btn_editar}" accesskey="6" styleClass="botoes"/>
+                                            <h:commandButton id="removerUsuarioPerfilAcesso" immediate="true" action="#{UsuarioControle.removerUsuarioPerfilAcesso}" value="#{msg_bt.btn_excluir}" accesskey="7" styleClass="botoes"/>
+                                        </h:panelGroup>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </rich:tab>
+                    <rich:tab id="aba2" label="Configurações do Usuário">
+                        <h:panelGrid columns="1" styleClass="tabForm" width="100%">
+                            <rich:tabPanel switchType="ajax">
+                                <rich:tab label="Configurações de Acesso">
+                                    <h:panelGrid id="controleAcesso" columns="1" width="100%" columnClasses="colunaEsquerda, colunaEsquerda" rowClasses="linhaImpar, linhaPar">
+                                        <f:facet name="header">
+                                            <h:outputText value="Configurações de Acesso"></h:outputText>
+                                        </f:facet>
+                                        <h:panelGroup>
+                                            <h:outputText  styleClass="tituloCampos" value="Bloquear Acesso"/>
+                                            <h:selectBooleanCheckbox id="bloquearAcesso" value="#{UsuarioControle.usuarioVO.bloquearAcesso}"/>
+                                        </h:panelGroup>
+
+                                        <h:dataTable id="items" width="100%" headerClass="consulta" styleClass="tabConsulta" rowClasses="linhaImpar, linhaPar" columnClasses="colunaCentralizada, colunaCentralizada, colunaCentralizada, colunaCentralizada"
+                                                     value="#{UsuarioControle.usuarioVO.usuarioPeriodoAcessoVOs}" rows="10" var="usuarioPeriodoAcesso">
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Dia da Semana"/>
+                                                </f:facet>
+                                                <h:outputText value="#{usuarioPeriodoAcesso.diaSemana_Apresentar}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Permitir Acesso"/>
+                                                </f:facet>
+                                                <h:selectBooleanCheckbox value="#{usuarioPeriodoAcesso.acessoPermitido}">
+                                                    <a4j:support event="onclick" reRender="controleAcesso"/>
+                                                </h:selectBooleanCheckbox>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Hora de Início"/>
+                                                </f:facet>
+                                                <h:panelGroup>
+                                                    <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.horasInicio}" style="position: relative; left: 20px;" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
+                                                        <f:selectItems  value="#{UsuarioControle.horaPeriodoAcesso}" />
+                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                    </h:selectOneMenu>
+                                                    <h:outputText value=":"/>
+                                                    <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.minutosInicio}" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
+                                                        <f:selectItems  value="#{UsuarioControle.minutosPeriodoAcesso}" />
+                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Hora de Encerramento"/>
+                                                </f:facet>
+                                                <h:panelGroup>
+                                                    <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.horasFim}"  style="position: relative; left: 20px;" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
+                                                        <f:selectItems  value="#{UsuarioControle.horaPeriodoAcesso}" />
+                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                    </h:selectOneMenu>
+                                                    <h:outputText value=":"/>
+                                                    <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.minutosFim}" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
+                                                        <f:selectItems  value="#{UsuarioControle.minutosPeriodoAcesso}" />
+                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                    </h:selectOneMenu>
+                                                    <h:outputText value="do próximo dia" style="position: relative; right: 15px;" rendered="#{usuarioPeriodoAcesso.acessoExtendeProximoDia}"/>
+                                                    <rich:spacer width="80px" rendered="#{!usuarioPeriodoAcesso.acessoExtendeProximoDia}"/>
+                                                </h:panelGroup>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:panelGrid>
+                                </rich:tab>
+                                <rich:tab label="Licença">
+                                    <h:panelGrid columns="2" width="100%" columnClasses="colunaEsquerda, colunaEsquerda">
+                                        <f:facet name="header">
+                                            <h:outputText value="Configurações de Licença do Sistema"></h:outputText>
+                                        </f:facet>
+                                        <h:panelGroup>
+                                            <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Usuario_mostrarMensagemBloqueio}"/>
+                                            <rich:spacer width="370px"/>
+                                            <h:selectBooleanCheckbox id="mostrarMensagemBloqueio" value="#{UsuarioControle.usuarioVO.mostrarMensagemBloqueioSistema}"/>
+                                        </h:panelGroup>
+
+                                    </h:panelGrid>
+                                </rich:tab>
+                            </rich:tabPanel>
+                        </h:panelGrid>
+                    </rich:tab>
+                </rich:tabPanel>
+
+                <h:panelGrid columns="2" width="100%" styleClass="tabMensagens">
+                    <h:panelGrid id="mensagens" columns="1" width="100%" styleClass="tabMensagens" columnClasses="colunaEsquerda">
+                        <h:outputText styleClass="linhaMensagem"  value="#{UsuarioControle.mensagem}"/>
+                        <h:outputText styleClass="mensagemDetalhada" value="#{UsuarioControle.mensagemDetalhada}"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="1" width="10%" styleClass="tabMensagenReduzida" columnClasses="colunaDireita">
+                        <h:outputText styleClass="tabMensagenReduzida" value="(Usuario)"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="4" width="100%" styleClass="tabBotoes" columnClasses="colunaCentralizada">
+                    <h:commandButton id="novo" immediate="true" action="#{UsuarioControle.novo}" value="#{msg_bt.btn_novo}" accesskey="1" styleClass="botoes"/>
+                    <h:commandButton id="salvar" action="#{UsuarioControle.gravar}" value="#{msg_bt.btn_gravar}" accesskey="2" styleClass="botoes"/>
+                    <h:commandButton id="excluir" onclick="return confirm('Confirma exclusão dos dados?');" action="#{UsuarioControle.excluir}" value="#{msg_bt.btn_excluir}" accesskey="3" styleClass="botaoExcluir"/>
+                    <h:commandButton id="consultar" immediate="true" action="#{UsuarioControle.inicializarConsultar}" value="#{msg_bt.btn_consultar}" accesskey="4" styleClass="botoes"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>        
+    </h:panelGrid>
+</f:view>
+<script>
+    document.getElementById("form:nome").focus();
+</script>

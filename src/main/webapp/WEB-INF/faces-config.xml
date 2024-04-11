@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+    <application>
+        <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+    </application>
+    <application>
+        <view-handler>org.ajax4jsf.application.AjaxViewHandler</view-handler>
+    </application>
+
+    <application>
+        <message-bundle>propriedades.botoes</message-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+    </application>
+    <application>
+        <message-bundle>propriedades.aplicacao</message-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+    </application>
+    <application>
+        <message-bundle>propriedades.menu</message-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+    </application>
+    <application>
+        <message-bundle>propriedades.enum</message-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+        </locale-config>
+    </application>
+    <application>
+        <message-bundle>propriedades.mensagens</message-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+    </application>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/home.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>erroLogin</from-outcome>
+            <to-view-id>/index.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/empresaForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/empresaForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/empresaCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/empresaCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/empresaForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/empresaCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/perfilAcessoForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/perfilAcessoForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/perfilAcessoCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/perfilAcessoCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/perfilAcessoForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/perfilAcessoCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/usuarioForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/usuarioForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/usuarioCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/usuarioCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/usuarioForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/usuarioCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/cidadeForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/cidadeForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/cidadeCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/cidadeCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/cidadeForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/cidadeCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/configuracaoSistemaForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/configuracaoSistemaForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/configuracaoSistemaCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/configuracaoSistemaCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/configuracaoSistemaForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/configuracaoSistemaCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/paisCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/paisForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/paisCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/paisForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/paisForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/paisCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/projetoForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/projetoForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/projetoCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/projetoCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/projetoForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/projetoCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/entidadeForm.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/entidadeForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/entidadeCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/entidadeCons.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/entidadeForm.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/entidadeCons.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+
+    <converter>
+        <converter-id>FormatadorNumericoNenhumaCasa</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoNenhumaCasa</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoUmaCasa</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoUmaCasa</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoDuasCasas</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoDuasCasas</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumerico</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumerico</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoTresCasas</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoTresCasas</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoQuatroCasas</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoQuatroCasas</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoCincoCasas</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoCincoCasas</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoSeisCasas</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoSeisCasas</converter-class>
+    </converter>
+    <converter>
+        <converter-id>FormatadorNumericoOitoCasas</converter-id>
+        <converter-class>controle.arquitetura.FormatadorNumericoOitoCasas</converter-class>
+    </converter>
+    <converter>
+        <converter-id>EnumConverter</converter-id>
+        <converter-class>controle.arquitetura.EnumConverter</converter-class>
+    </converter>
+</faces-config>

@@ -1,0 +1,112 @@
+/* 
+    Document   : responsivo.css
+    Created on : 29/09/2017, 10:26:49
+    Author     : flayson
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/** {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}*/
+
+body {
+    padding: 10px 2%;
+}
+form {
+
+}
+form > div {
+    clear: both;
+    overflow: hidden;
+    padding: 1px;
+    margin: 0 0 10px 0;
+}
+/*form > div > fieldset > div > div {
+    margin: 0 0 5px 0;
+}*/
+
+form > div > div,
+form > div > fieldset > div {
+    width: 75%;
+    float: right;
+    margin-right: 50px;
+}
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password],
+textarea {
+    /*	width: 100%;*/
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+   
+}
+
+textarea {
+     width: 500px !important;
+     height: 50px !important;
+}
+
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=url]:focus,
+input[type=password]:focus,
+textarea:focus {
+    outline: 0;
+    border-color: #4697e4;
+}
+
+
+@media (max-width: 480px) {
+    font-size: 120%;
+    form > div {
+        margin: 0 0 15px 0;
+    }
+    form > div > span,
+    legend {
+        width: 100%;
+        float: none;
+        margin: 0 0 5px 0;
+    }
+    form > div > div,
+    form > div > fieldset > div {
+        width: 100%;
+        float: none;
+    }
+    input[type=text],
+    input[type=email],
+    input[type=url],
+    input[type=password],
+    textarea,
+    select {
+        width: 99% !important;
+        margin-left: 2px !important;
+    }
+
+    .spanOutput {
+        margin-left: 2px !important;
+    }
+
+    .tabMensagens {
+        margin-left: 0px !important;
+    }
+    .campoMenorResponsivo {
+        width: 20% !important;
+    }
+}
+
+.spanOutput {
+    margin-left: 5px;
+}
+
+.tabMensagens {
+    margin-left: 2px;
+}
+/*@media (min-width: 1200px) {
+
+}*/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aplicacao>
+    <bd>
+        <nomeBD>MSIBD</nomeBD>
+        <servidor>localhost</servidor>
+        <username>postgres</username>
+        <senha>admin</senha>
+        <porta>5432</porta>
+        <JNDI>jdbc/MSIBD</JNDI>
+    </bd>
+</aplicacao>
