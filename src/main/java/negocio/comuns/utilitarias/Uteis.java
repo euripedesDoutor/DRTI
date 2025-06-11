@@ -251,12 +251,17 @@ public class Uteis {
         return dataSQL;
     }
 
+    /**
+     * Retorna apenas a hora (HH:mm) de uma data. O código anterior criava um
+     * {@link SimpleDateFormat} extra sem utilizá-lo, resultando em alocações
+     * desnecessárias. A nova implementação cria apenas um formatador com o
+     * padrão desejado e trata o caso de data nula.
+     */
     public static String getObterHoraData(Date data) {
-        String tipoData = "dd/MM/yyyy";
-        String tipoHora = "HH:mm";
-
-        SimpleDateFormat formata = new SimpleDateFormat(tipoData);
-        formata = new SimpleDateFormat(tipoHora);
+        if (data == null) {
+            return "";
+        }
+        SimpleDateFormat formata = new SimpleDateFormat("HH:mm");
         return formata.format(data);
     }
 
