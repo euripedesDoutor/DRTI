@@ -1,14 +1,8 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
 
-<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<%@taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
-<%@taglib prefix="rich" uri="http://richfaces.org/rich"%>
 
-<f:view>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <jsp:include page="loads.jsp"/>
+    <ui:include src="loads.xhtml"/>
     <title>
         <h:outputText value="#{msg_aplic.prt_Cidade_tituloForm}"/>
     </title>
@@ -16,7 +10,7 @@
     <h:panelGrid columns="1" width="100%" cellpadding="0" cellspacing="0">
         <f:facet name="header">
             <f:verbatim>
-                <jsp:include page="topoReduzido.jsp"/>
+                <ui:include src="topoReduzido.xhtml"/>
             </f:verbatim>
         </f:facet>
 
@@ -41,7 +35,7 @@
                         <h:panelGroup>
                             <h:selectOneMenu  id="estado" styleClass="camposObrigatorios" value="#{CidadeControle.cidadeVO.estado}" >
                                 <f:selectItems  value="#{CidadeControle.listaSelectItemEstadoCidade}" />
-                                <a4j:support event="onchange" reRender="form" focus="estado"/>
+                                <p:ajax event="onchange" update="form" focus="estado"/>
                             </h:selectOneMenu>
                         </h:panelGroup>
                         <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Cidade_codigoIBGE}" rendered="#{!CidadeControle.cidadeVO.estadoEX}"/>
@@ -50,7 +44,7 @@
                         <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Cidade_pais}" />
                         <h:panelGroup>
                             <h:inputText  id="pais"  size="60" maxlength="80" styleClass="camposObrigatorios" value="#{CidadeControle.cidadeVO.pais.nome}" />
-                            <rich:suggestionbox
+                            <p:autoComplete
                                 height="100"
                                 width="800"
                                 for="pais"
@@ -61,12 +55,12 @@
                                 nothingLabel="Nenhum país encontrado!"
                                 var="result"
                                 id="paisSugggestionBoxTrocaMercadoria">
-                                <a4j:support event="onselect" focus=""
-                                             reRender="form"
+                                <p:ajax event="onselect" focus=""
+                                             update="form"
                                              action="#{CidadeControle.consultarPaisPorChavePrimaria}">
                                     <f:setPropertyActionListener target="#{CidadeControle.cidadeVO.pais}"
                                                                  value="#{result}" />
-                                </a4j:support>
+                                </p:ajax>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{msg_aplic.prt_Pais_nome}" />
@@ -86,7 +80,7 @@
                                     <h:outputText value="#{result.codigoSiscomex}" />
                                 </h:column>
 
-                            </rich:suggestionbox>
+                            </p:autoComplete>
                             <h:outputText escape="false" style="font: 7pt verdana, arial, helvetica, sans-serif;" value="<br>&nbsp;&nbsp;&nbsp;Mínimo #{LoginControle.configuracaoEmpresaLogado.quantidadeDigitosAutoComplete} caracteres" />
                         </h:panelGroup>
 
