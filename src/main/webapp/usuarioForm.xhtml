@@ -1,14 +1,8 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
 
-<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<%@taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
-<%@taglib prefix="rich" uri="http://richfaces.org/rich"%>
 
-<f:view>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <jsp:include page="loads.jsp"/>
+    <ui:include src="loads.xhtml"/>
     <title>
         <h:outputText value="#{msg_aplic.prt_Usuario_tituloForm}"/>
     </title>
@@ -17,15 +11,15 @@
     <h:panelGrid columns="1" width="100%" cellpadding="0" cellspacing="0">
         <f:facet name="header">
             <f:verbatim>
-                <jsp:include page="topoReduzido.jsp"/>
+                <ui:include src="topoReduzido.xhtml"/>
             </f:verbatim>
         </f:facet>
 
         <h:form id="form">
             <h:commandLink action="#{UsuarioControle.liberarBackingBeanMemoria}" id="idLiberarBackingBeanMemoria" style="display: none" />
             <h:panelGrid columns="1" styleClass="tabconteudo" width="100%">
-                <rich:tabPanel switchType="ajax">
-                    <rich:tab label="Geral">
+                <p:tabView switchType="ajax">
+                    <p:tab label="Geral">
                         <h:panelGrid columns="1" styleClass="tabForm" width="100%">
                             <h:panelGrid columns="2" styleClass="tabConsulta" width="100%">
                                 <f:facet name="header">
@@ -37,7 +31,7 @@
                                     <h:inputText  id="username" size="10" maxlength="10" styleClass="camposObrigatorios" value="#{UsuarioControle.usuarioVO.username}" />
                                 </h:panelGroup>
                                 <h:outputText value=""/>
-                                <a4j:commandButton ignoreDupResponses="true" id="resetarSenha" rendered="#{UsuarioControle.mostrarBotaoResetarSenha}" action="#{UsuarioControle.resetarSenha}" styleClass="botoes" value="#{msg_bt.btn_resetarSenhaUsuario}" reRender="form"/>
+                                <p:commandButton ignoreDupResponses="true" id="resetarSenha" rendered="#{UsuarioControle.mostrarBotaoResetarSenha}" action="#{UsuarioControle.resetarSenha}" styleClass="botoes" value="#{msg_bt.btn_resetarSenhaUsuario}" update="form"/>
 
                                 <h:outputText styleClass="tituloCampos" value="#{msg_aplic.prt_Usuario_nome}" />
                                 <h:inputText id="nome" size="57" onkeypress="autoTab(this, event);" styleClass="camposObrigatorio" value="#{UsuarioControle.usuarioVO.nome}" />
@@ -53,7 +47,7 @@
                                         <h:selectOneMenu  id="empresa" styleClass="camposObrigatorios" value="#{UsuarioControle.usuarioPerfilAcessoVO.empresa.codigo}" >
                                             <f:selectItems  value="#{UsuarioControle.listaSelectItemEmpresa}" />
                                         </h:selectOneMenu>
-                                        <a4j:commandButton ignoreDupResponses="true" id="atualizar_empresa" action="#{UsuarioControle.montarListaSelectItemEmpresa}" image="imagens/atualizar.png" immediate="true" ajaxSingle="true" reRender="form:empresa"/>
+                                        <p:commandButton ignoreDupResponses="true" id="atualizar_empresa" action="#{UsuarioControle.montarListaSelectItemEmpresa}" image="imagens/atualizar.png" immediate="true" ajaxSingle="true" update="form:empresa"/>
                                         <h:message for="empresa" styleClass="mensagemDetalhada"/>
                                     </h:panelGroup>
                                     <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_UsuarioPerfilAcesso_codPerfilAcesso}" />
@@ -61,7 +55,7 @@
                                         <h:selectOneMenu  id="codPerfilAcesso" styleClass="camposObrigatorios" value="#{UsuarioControle.usuarioPerfilAcessoVO.perfilAcesso.codigo}" >
                                             <f:selectItems  value="#{UsuarioControle.listaSelectItemCodPerfilAcesso}" />
                                         </h:selectOneMenu>
-                                        <a4j:commandButton ignoreDupResponses="true" id="atualizar_codPerfilAcesso" action="#{UsuarioControle.montarListaSelectItemCodPerfilAcesso}" image="imagens/atualizar.png" immediate="true" ajaxSingle="true" reRender="form:codPerfilAcesso"/>
+                                        <p:commandButton ignoreDupResponses="true" id="atualizar_codPerfilAcesso" action="#{UsuarioControle.montarListaSelectItemCodPerfilAcesso}" image="imagens/atualizar.png" immediate="true" ajaxSingle="true" update="form:codPerfilAcesso"/>
                                         <h:message for="codPerfilAcesso" styleClass="mensagemDetalhada"/>
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -96,11 +90,11 @@
                                 </h:dataTable>
                             </h:panelGrid>
                         </h:panelGrid>
-                    </rich:tab>
-                    <rich:tab id="aba2" label="Configurações do Usuário">
+                    </p:tab>
+                    <p:tab id="aba2" label="Configurações do Usuário">
                         <h:panelGrid columns="1" styleClass="tabForm" width="100%">
-                            <rich:tabPanel switchType="ajax">
-                                <rich:tab label="Configurações de Acesso">
+                            <p:tabView switchType="ajax">
+                                <p:tab label="Configurações de Acesso">
                                     <h:panelGrid id="controleAcesso" columns="1" width="100%" columnClasses="colunaEsquerda, colunaEsquerda" rowClasses="linhaImpar, linhaPar">
                                         <f:facet name="header">
                                             <h:outputText value="Configurações de Acesso"></h:outputText>
@@ -124,7 +118,7 @@
                                                     <h:outputText value="Permitir Acesso"/>
                                                 </f:facet>
                                                 <h:selectBooleanCheckbox value="#{usuarioPeriodoAcesso.acessoPermitido}">
-                                                    <a4j:support event="onclick" reRender="controleAcesso"/>
+                                                    <p:ajax event="onclick" update="controleAcesso"/>
                                                 </h:selectBooleanCheckbox>
                                             </h:column>
                                             <h:column>
@@ -134,12 +128,12 @@
                                                 <h:panelGroup>
                                                     <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.horasInicio}" style="position: relative; left: 20px;" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
                                                         <f:selectItems  value="#{UsuarioControle.horaPeriodoAcesso}" />
-                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                        <p:ajax event="onchange" update="controleAcesso"/>
                                                     </h:selectOneMenu>
                                                     <h:outputText value=":"/>
                                                     <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.minutosInicio}" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
                                                         <f:selectItems  value="#{UsuarioControle.minutosPeriodoAcesso}" />
-                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                        <p:ajax event="onchange" update="controleAcesso"/>
                                                     </h:selectOneMenu>
                                                 </h:panelGroup>
                                             </h:column>
@@ -150,37 +144,37 @@
                                                 <h:panelGroup>
                                                     <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.horasFim}"  style="position: relative; left: 20px;" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
                                                         <f:selectItems  value="#{UsuarioControle.horaPeriodoAcesso}" />
-                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                        <p:ajax event="onchange" update="controleAcesso"/>
                                                     </h:selectOneMenu>
                                                     <h:outputText value=":"/>
                                                     <h:selectOneMenu  styleClass="camposObrigatorios" value="#{usuarioPeriodoAcesso.minutosFim}" disabled="#{!usuarioPeriodoAcesso.acessoPermitido}">
                                                         <f:selectItems  value="#{UsuarioControle.minutosPeriodoAcesso}" />
-                                                        <a4j:support event="onchange" reRender="controleAcesso"/>
+                                                        <p:ajax event="onchange" update="controleAcesso"/>
                                                     </h:selectOneMenu>
                                                     <h:outputText value="do próximo dia" style="position: relative; right: 15px;" rendered="#{usuarioPeriodoAcesso.acessoExtendeProximoDia}"/>
-                                                    <rich:spacer width="80px" rendered="#{!usuarioPeriodoAcesso.acessoExtendeProximoDia}"/>
+                                                    <p:spacer width="80px" rendered="#{!usuarioPeriodoAcesso.acessoExtendeProximoDia}"/>
                                                 </h:panelGroup>
                                             </h:column>
                                         </h:dataTable>
                                     </h:panelGrid>
-                                </rich:tab>
-                                <rich:tab label="Licença">
+                                </p:tab>
+                                <p:tab label="Licença">
                                     <h:panelGrid columns="2" width="100%" columnClasses="colunaEsquerda, colunaEsquerda">
                                         <f:facet name="header">
                                             <h:outputText value="Configurações de Licença do Sistema"></h:outputText>
                                         </f:facet>
                                         <h:panelGroup>
                                             <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Usuario_mostrarMensagemBloqueio}"/>
-                                            <rich:spacer width="370px"/>
+                                            <p:spacer width="370px"/>
                                             <h:selectBooleanCheckbox id="mostrarMensagemBloqueio" value="#{UsuarioControle.usuarioVO.mostrarMensagemBloqueioSistema}"/>
                                         </h:panelGroup>
 
                                     </h:panelGrid>
-                                </rich:tab>
-                            </rich:tabPanel>
+                                </p:tab>
+                            </p:tabView>
                         </h:panelGrid>
-                    </rich:tab>
-                </rich:tabPanel>
+                    </p:tab>
+                </p:tabView>
 
                 <h:panelGrid columns="2" width="100%" styleClass="tabMensagens">
                     <h:panelGrid id="mensagens" columns="1" width="100%" styleClass="tabMensagens" columnClasses="colunaEsquerda">

@@ -53,7 +53,7 @@
         <session-timeout>300</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.jsp</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>

@@ -1,14 +1,8 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
 
-<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<%@taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
-<%@taglib prefix="rich" uri="http://richfaces.org/rich"%>
 
-<f:view>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <jsp:include page="loads.jsp"/>
+    <ui:include src="loads.xhtml"/>
     <title>Perfil Acesso</title>
 
     <title>
@@ -18,7 +12,7 @@
     <h:panelGrid columns="1" width="100%" cellpadding="0" cellspacing="0">
         <f:facet name="header">
             <f:verbatim>
-                <jsp:include page="topoReduzido.jsp"/>
+                <ui:include src="topoReduzido.xhtml"/>
             </f:verbatim>
         </f:facet>
 
@@ -35,7 +29,7 @@
                             <h:panelGroup>
                                 <h:inputText  id="nome" size="70" maxlength="100" styleClass="camposObrigatorios" value="#{PerfilAcessoControle.perfilAcessoVO.nome}" rendered="#{PerfilAcessoControle.perfilAcessoVO.novoObj || (!PerfilAcessoControle.perfilAcessoVO.novoObj && PerfilAcessoControle.userNameIsAdmin)}" />
                                 <h:outputText  styleClass="tituloCamposNegrito" value="#{PerfilAcessoControle.perfilAcessoVO.nome}"  rendered="#{!PerfilAcessoControle.perfilAcessoVO.novoObj && !PerfilAcessoControle.userNameIsAdmin}"/>
-                                <rich:spacer width="100px"/>
+                                <p:spacer width="100px"/>
                                 <h:commandButton id="clonarPerfil" value="#{msg_bt.btn_clonarPerfilAcesso}" styleClass="botoes" rendered="#{!PerfilAcessoControle.perfilAcessoVO.novoObj}" action="#{PerfilAcessoControle.clonarPerfilAcesso}"/>
                                 <h:message for="nome" styleClass="mensagemDetalhada"/>
                             </h:panelGroup>
@@ -62,7 +56,7 @@
                                 <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Permissao_nomeModulos}" />
                                 <h:selectOneMenu  id="Permissao_modulos" styleClass="camposObrigatorios" value="#{PerfilAcessoControle.modulo}" >
                                     <f:selectItems  value="#{PerfilAcessoControle.listaSelectItemModulos}" />
-                                    <a4j:support event="onchange" action="#{PerfilAcessoControle.inicializarListaSelectItemTodasFuncionalidades}" reRender="Permissao_funcionalidades"/>
+                                    <p:ajax event="onchange" action="#{PerfilAcessoControle.inicializarListaSelectItemTodasFuncionalidades}" update="Permissao_funcionalidades"/>
                                 </h:selectOneMenu>
                                 <h:outputText  styleClass="tituloCampos" value="#{msg_aplic.prt_Permissao_nomeEntidade}" />
                                 <h:selectOneMenu  id="Permissao_funcionalidades" styleClass="camposObrigatorios" value="#{PerfilAcessoControle.permissaoVO.nomeEntidade}" >
@@ -76,41 +70,41 @@
                             <h:commandButton action="#{PerfilAcessoControle.adicionarPermissao}" value="#{msg_bt.btn_adicionar}" accesskey="5" styleClass="botoes"/>
                         </h:panelGrid>
                         <h:panelGrid columns="1" width="100%" styleClass="tabFormSubordinada">
-                            <rich:dataTable id="dataTablePermissao" width="100%" headerClass="subordinado" styleClass="tabFormSubordinada"
+                            <p:dataTable id="dataTablePermissao" width="100%" headerClass="subordinado" styleClass="tabFormSubordinada"
                                             rowClasses="linhaImparSubordinado, linhaParSubordinado" columnClasses="colunaAlinhamento"
                                             value="#{PerfilAcessoControle.perfilAcessoVO.permissaoVOs}" var="permissao" rows="10">
-                                <rich:column filterBy="#{permissao.tituloApresentacao}" filterEvent="onkeyup">
+                                <p:column filterBy="#{permissao.tituloApresentacao}" filterEvent="onkeyup">
                                     <f:facet name="header" >
                                         <h:outputText  value="#{msg_aplic.prt_Permissao_nomeEntidade}" />
                                     </f:facet>
                                     <div align="left">
                                         <h:outputText  value="#{permissao.tituloApresentacao}" />
                                     </div>
-                                </rich:column>
-                                <rich:column filterBy="#{permissao.permissoes_Apresentar}" filterEvent="onkeyup">
+                                </p:column>
+                                <p:column filterBy="#{permissao.permissoes_Apresentar}" filterEvent="onkeyup">
                                     <f:facet name="header">
                                         <h:outputText  value="#{msg_aplic.prt_Permissao_permissoes}" />
                                     </f:facet>
                                     <%--<h:outputText  value="#{permissao.permissoes_Apresentar}" />--%>
                                     <h:selectOneMenu  id="permissao" styleClass="camposObrigatorios" value="#{permissao.temporaria}" >
-                                        <a4j:support event="onchange" action="#{permissao.alterarPermissao}"/>
+                                        <p:ajax event="onchange" action="#{permissao.alterarPermissao}"/>
                                         <f:selectItems  value="#{PerfilAcessoControle.listaSelectItemPermissoesPermissao}" />
                                     </h:selectOneMenu>
-                                </rich:column>
+                                </p:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:commandButton id="removerPermissaoTodosMarcados" action="#{PerfilAcessoControle.removerPermissaoTodosMarcados}" style="height:20px;width:15px;" alt="Remover Marcados" image="./imagens/iconeLixeira.png"/>
                                     </f:facet>
                                     <h:panelGroup>
                                         <h:selectBooleanCheckbox id="remover" value="#{permissao.remover}">
-                                            <a4j:support event="onclick" reRender="remover"/>
+                                            <p:ajax event="onclick" update="remover"/>
                                         </h:selectBooleanCheckbox>
                                     </h:panelGroup>
                                 </h:column>
-                            </rich:dataTable>
+                            </p:dataTable>
 
                         </h:panelGrid>
-                        <rich:datascroller align="center" for="form:dataTablePermissao" reRender="form"/>
+                        <p:dataScroller align="center" for="form:dataTablePermissao" update="form"/>
                         <h:panelGrid columns="2" width="100%" styleClass="tabMensagens">
                             <h:panelGrid columns="1" width="100%" styleClass="tabMensagens" columnClasses="colunaEsquerda">
                                 <h:outputText styleClass="linhaMensagem"  value="#{PerfilAcessoControle.mensagem}"/>

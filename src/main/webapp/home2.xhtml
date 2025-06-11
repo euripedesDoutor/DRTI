@@ -1,0 +1,131 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:outputScript src="script/script.js" />    <h:outputStylesheet src="css/azul.css"/>
+    <style type="text/css">body {margin: 0px;padding: 0px;}</style>    <link rel="shortcut icon" href="./favicon.ico" >
+    <p:dialog id="panelSair" autosized="true" shadowOpacity="true" width="350" height="160" >
+        <f:facet name="header"><h:outputText value="CONFIRMAÇÃO"/></f:facet>
+        <h:form id="formSair" ajaxSubmit="true">
+            <h:panelGrid columns="1" width="350px" styleClass="colunaCentralizada">
+                <h:outputText  styleClass="tituloCampos" value="Deseja realmente sair?" /><p:spacer height="20px"/>
+                <h:panelGrid columns="2" width="100%" columnClasses="colunaCentralizada" >
+                    <p:commandButton ignoreDupResponses="true" action="#{LoginControle.logout}" oncomplete="Richfaces.hideModalPanel('panelSair');" update="form" value=" - #{msg_bt.btn_sim} - " styleClass="botoes"/>
+                    <p:commandButton id="hidelinkSair" ignoreDupResponses="true" onclick="Richfaces.hideModalPanel('panelSair');" update="form" value=" - #{msg_bt.btn_nao} - " styleClass="botoes"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog id="panelMudarSenha" autosized="true" shadowOpacity="true" width="350" height="160" onshow="document.getElementById('formMudarSenha:senhaAtual').focus();">
+        <f:facet name="header"><h:outputText value="#{msg_aplic.prt_mudarSenha}"/></f:facet>        
+        <h:form id="formMudarSenha" ajaxSubmit="true">
+            <h:panelGrid columns="1" width="350px" style="background-image:url('./imagens/chaves.png'); background-repeat: no-repeat" styleClass="colunaCentralizada">
+                <h:panelGrid columns="2" width="100%" styleClass="colunaCentralizada" >
+                    <h:outputText  styleClass="tituloCampos" value="Senha Atual" />
+                    <h:inputSecret maxlength="50" id="senhaAtual" styleClass="campos" value="#{LoginControle.senha}"/>
+                    <h:outputText  styleClass="tituloCampos" value="Nova Senha" />
+                    <h:inputSecret maxlength="50" id="novaSenha" styleClass="campos" value="#{LoginControle.novaSenha}">
+                        <p:ajax event="onkeyup" update="panelValidacoes"/>
+                    </h:inputSecret>
+                    <h:outputText  styleClass="tituloCampos" value="Confirmar Senha" />
+                    <h:inputSecret maxlength="50"  styleClass="campos" value="#{LoginControle.novaSenha2}">
+                        <p:ajax event="onkeyup" update="panelValidacoes"/>
+                    </h:inputSecret>
+                </h:panelGrid>
+                <h:panelGrid columns="2" id="panelValidacoes" width="100%" styleClass="colunaCentralizada" >
+                    <p:spacer width="120px"/>
+                    <h:outputText escape="false" value="#{LoginControle.labelTamanhoSenha}"/>
+                    <p:spacer width="10px"/>
+                    <h:outputText escape="false" value="#{LoginControle.labelSenhaLetraMaiuscula}"/>
+                    <p:spacer width="10px"/>
+                    <h:outputText escape="false" value="#{LoginControle.labelSenhaNumero}"/>
+                    <p:spacer width="10px"/>
+                    <h:outputText escape="false" value="#{LoginControle.labelSenhaCaractereEspecial}"/>
+                    <p:spacer width="10px"/>
+                    <h:outputText escape="false" value="#{LoginControle.labelSenhaIdenticos}"/>
+                    <p:spacer width="60px"/>
+                    <h:outputText value="#{LoginControle.mensagemDetalhada}" style="#{LoginControle.cssMensagemMudarSenha}"/>
+                    <p:spacer width="60px"/>
+                    <h:panelGroup>
+                        <p:commandButton ignoreDupResponses="true" action="#{LoginControle.mudarSenha}" update="formMudarSenha" value="#{msg_bt.btn_gravar}" styleClass="#{LoginControle.cssBotaoMudarSenha}" disabled="#{!LoginControle.apresentarBotaoMudarSenha}"/>
+                        <p:spacer width="10px"/>
+                        <p:commandButton ignoreDupResponses="true" update="form, formMudarSenha" oncomplete="Richfaces.hideModalPanel('panelMudarSenha')" value="#{msg_bt.btn_fechar}" styleClass="botoes"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+
+    <title><h:outputText value="DISCOVERY - #{LoginControle.versaoSistema}"/></title>
+    <h:panelGrid columns="1" columnClasses="colunaCentralizada" rendered="false">
+        <h:form id="form">
+            <h:commandLink action="#{LoginControle.liberarBackingBeanMemoria}" id="idLiberarBackingBeanMemoria" style="display: none" />
+            <h:panelGrid columns="1" width="100%"  columnClasses="colunaCentralizada"  cellpadding="0" cellspacing="0" >
+                <h:panelGrid columns="1" width="100%"  columnClasses="colunaCentralizada" style="position:relative; left:2px;" cellpadding="0" cellspacing="0" >
+                    <f:facet name="header"><ui:include src="topo.xhtml"/></f:facet>
+                </h:panelGrid>
+                <h:panelGrid columns="1" style="background-image:url('./imagens/azul/fundoHome.png');background-repeat: no-repeat;background-position: center; height: 500px;" columnClasses="colunaCentralizada" width="100%" >
+                    <h:panelGroup><p:poll interval="10000" id="poolInformarTelaAberta" action="#{LoginControle.atualizarTelaAberta}"/></h:panelGroup>
+                    <h:panelGrid columns="3" width="130px">
+                        <h:graphicImage value="/imagens/#{ConfiguracaoSistemaControle.nomeImagemBanner}" id="imagemBanner" style="width:520px;height:320px; vertical-align: center;"/>
+                        <h:panelGrid width="150px" style="position:relative; top: -20px; left:100px;" id="panelBotaoCorreio"></h:panelGrid>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <h:panelGrid columns="3" width="95%" columnClasses="colunaEsquerda, colunaCentralizada, colunaDireita" style="position:relative; top: -20px;">
+                            <h:outputText id="empresaLogada" value="Empresa : #{LoginControle.empresaLogado.codigo} - #{LoginControle.empresaLogado.nomeFantasia}"/>
+                            <h:outputText id="ultimoAcesso" value="Último Acesso : #{LoginControle.usuarioLogado.dataUltimoAcesso_Apresentar}"/>
+                            <h:outputText id="nomeUsuarioLogado" value="Usuário : #{LoginControle.usuarioLogado.codigo} - #{LoginControle.usuarioLogado.nome}"/>
+                        </h:panelGrid>
+                    </f:facet>
+                </h:panelGrid>
+            </h:panelGrid>
+            <p:contextMenu event="oncontextmenu" attachTo="cidade" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="cidade" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+            <p:contextMenu event="oncontextmenu" attachTo="pais" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="pais" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+            <p:contextMenu event="oncontextmenu" attachTo="empresa" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="empresa" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+            <p:contextMenu event="oncontextmenu" attachTo="configuracaoSistema" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="configuracaoSistema" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+            <p:contextMenu event="oncontextmenu" attachTo="loginUsuario" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="loginUsuario" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+            <p:contextMenu event="oncontextmenu" attachTo="perfilAcesso" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="perfilAcesso" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+            <p:contextMenu event="oncontextmenu" attachTo="usuario" showDelay="250" submitMode="ajax">
+                <p:menuItem value="Adicionar aos Favoritos" submitMode="none">
+                    <p:ajax event="onclick" action="#{LoginControle.prepararFavoritoParaApresentarModal}" oncomplete="Richfaces.showModalPanel('panelAdicionarFavorito');" update="formAdicionarFavorito">
+                        <f:setPropertyActionListener target="#{LoginControle.favorito.entidade}" value="usuario" />
+                    </p:ajax>
+                </p:menuItem>
+            </p:contextMenu>
+        </h:form>
+    </h:panelGrid>
+</f:view>

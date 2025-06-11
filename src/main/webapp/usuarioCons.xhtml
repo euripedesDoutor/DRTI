@@ -1,19 +1,13 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
 
-<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<%@taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
-<%@taglib prefix="rich" uri="http://richfaces.org/rich"%>
 
-<f:view>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <jsp:include page="loads.jsp"/>
+    <ui:include src="loads.xhtml"/>
     <title>
         <h:outputText value="#{msg_aplic.prt_Usuario_tituloForm}"/>
     </title>
 
-    <rich:modalPanel id="panelListaPerfilAcesso" autosized="true" shadowOpacity="true" width="400" height="300">
+    <p:dialog id="panelListaPerfilAcesso" autosized="true" shadowOpacity="true" width="400" height="300">
         <f:facet name="header">
             <h:panelGroup>
                 <h:outputText value="Perfis de Acesso"></h:outputText>
@@ -22,12 +16,11 @@
         <f:facet name="controls">
             <h:panelGroup>
                 <h:graphicImage value="/imagens/close.png" style="cursor:pointer" id="hidelinkListaPerfilAcesso"/>
-                <rich:componentControl for="panelListaPerfilAcesso" attachTo="hidelinkListaPerfilAcesso" operation="hide"
                                        event="onclick"/>
             </h:panelGroup>
         </f:facet>
 
-        <a4j:form id="formListaPerfilAcesso" ajaxSubmit="true">
+        <h:form id="formListaPerfilAcesso" ajaxSubmit="true">
             <h:panelGrid columns="2" width="100%" columnClasses="colunaDireita, colunaEsquerda">
                 <h:outputText styleClass="tituloCampos" value="#{msg_aplic.prt_Usuario_tituloForm}:"/>
                 <h:outputText styleClass="tituloCamposNegrito12"
@@ -35,26 +28,26 @@
                               style="position: relative; top: -3px;"/>
             </h:panelGrid>
             <h:panelGrid columns="1" width="100%">
-                <rich:dataTable id="resultadoConsultaPerfilAcesso" width="100%" headerClass="consulta"
+                <p:dataTable id="resultadoConsultaPerfilAcesso" width="100%" headerClass="consulta"
                                 rowClasses="linhaImpar, linhaPar"
                                 columnClasses="colunaEsquerda, colunaEsquerda"
                                 value="#{UsuarioControle.usuarioConsulta.usuarioPerfilAcessoVOs}" rows="10" var="perfilAcesso">
 
-                    <rich:column sortBy="#{perfilAcesso.empresa.nomeFantasia}">
+                    <p:column sortBy="#{perfilAcesso.empresa.nomeFantasia}">
                         <f:facet name="header">
                             <h:outputText value="#{msg_aplic.prt_UsuarioPerfilAcesso_empresa}"/>
                         </f:facet>
                         <h:outputText value="#{perfilAcesso.empresa.nomeFantasia}"/>
-                    </rich:column>
-                    <rich:column sortBy="#{perfilAcesso.perfilAcesso.nome}">
+                    </p:column>
+                    <p:column sortBy="#{perfilAcesso.perfilAcesso.nome}">
                         <f:facet name="header">
                             <h:outputText value="#{msg_aplic.prt_PerfilAcesso_nome}"/>
                         </f:facet>
                         <h:outputText value="#{perfilAcesso.perfilAcesso.nome}"/>
-                    </rich:column>
-                </rich:dataTable>
+                    </p:column>
+                </p:dataTable>
 
-                <rich:datascroller align="center" maxPages="10"
+                <p:dataScroller align="center" maxPages="10"
                                    for="resultadoConsultaPerfilAcesso"
                                    id="dscResultadoPerfilAcesso"/>
                 <h:panelGrid id="mensagemConsultaPerfilAcesso" columns="1" width="100%" styleClass="tabMensagens">
@@ -64,13 +57,13 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </h:panelGrid>
-        </a4j:form>
-    </rich:modalPanel>
+        </h:form>
+    </p:dialog>
 
     <h:panelGrid columns="1" width="100%" cellpadding="0" cellspacing="0">
         <f:facet name="header">
             <f:verbatim>
-                <jsp:include page="topoReduzido.jsp"/>
+                <ui:include src="topoReduzido.xhtml"/>
             </f:verbatim>
         </f:facet>
 
@@ -84,14 +77,14 @@
                         </f:facet>
                         <h:outputText styleClass="tituloCampos" value="#{msg.msg_consultar_por}"/> 
                         <h:selectOneMenu styleClass="campos" id="consulta" required="true" value="#{UsuarioControle.controleConsulta.campoConsulta}">
-                            <a4j:support event="onchange" reRender="formCadastro"/>
+                            <p:ajax event="onchange" update="formCadastro"/>
                             <f:selectItems value="#{UsuarioControle.tipoConsultaCombo}" />
                         </h:selectOneMenu>
 
                         <h:panelGroup rendered="#{!UsuarioControle.tipoConsultaPerfilAcesso && !UsuarioControle.tipoConsultaSituacaoAcesso}">
                             <h:inputText id="valorConsulta" styleClass="campos" value="#{UsuarioControle.controleConsulta.valorConsulta}"/>
 
-                            <rich:suggestionbox
+                            <p:autoComplete
                                 height="100"
                                 width="400"
                                 for="valorConsulta"
@@ -102,12 +95,12 @@
                                 nothingLabel="Nenhum Usuário encontrado"
                                 var="result"
                                 id="usuarioSuggestionBox">
-                                <a4j:support event="onselect" focus="valorConsulta"
-                                             reRender="form"
+                                <p:ajax event="onselect" focus="valorConsulta"
+                                             update="form"
                                              action="#{UsuarioControle.consultar}">
                                     <f:setPropertyActionListener target="#{UsuarioControle.usuarioVO}"
                                                                  value="#{result}" />
-                                </a4j:support>
+                                </p:ajax>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{msg_aplic.prt_Usuario_codigo}" />
@@ -122,7 +115,7 @@
                                     <h:outputText value="#{result.nome}" />
                                 </h:column>
 
-                            </rich:suggestionbox>
+                            </p:autoComplete>
 
                         </h:panelGroup>
                         <h:panelGroup rendered="#{UsuarioControle.tipoConsultaPerfilAcesso}">
@@ -166,7 +159,7 @@
                             <h:commandLink action="#{UsuarioControle.editar}" id="bloquearAcesso">
                                 <h:outputText escape="false" value="<i class=\"fa-solid fa-user-lock\"></i>" rendered="#{usuario2.bloquearAcesso}" style="color: #990000;"/>
                                 <h:outputText escape="false" value="<i class=\"fa-solid fa-circle-check\"></i>" rendered="#{!usuario2.bloquearAcesso}" style="color: #007700;"/>
-                                <rich:spacer width="5px"/>
+                                <p:spacer width="5px"/>
                                 <h:outputText value="#{usuario2.bloquearAcesso_Apresentar}"/>
                             </h:commandLink>
                         </h:column>
@@ -181,14 +174,14 @@
                                 <h:outputText value="#{msg_bt.btn_opcoes}"/>
                             </f:facet>
                             <h:commandButton action="#{UsuarioControle.editar}" value="#{msg_bt.btn_editar}" styleClass="botoes"/>
-                            <a4j:commandButton id="listarPerfilAcesso" ignoreDupResponses="true" reRender="formListaPerfilAcesso"
+                            <p:commandButton id="listarPerfilAcesso" ignoreDupResponses="true" update="formListaPerfilAcesso"
                                                image="./imagens/informacao.gif"
                                                action="#{UsuarioControle.consultarPerfilAcesso}"
                                                oncomplete="Richfaces.showModalPanel('panelListaPerfilAcesso')"/>
 
                         </h:column>
                     </h:dataTable>
-                    <rich:datascroller align="center" for="formCadastro:items"  id="scResultadoConsulta" />
+                    <p:dataScroller align="center" for="formCadastro:items"  id="scResultadoConsulta" />
 
                     <h:panelGrid columns="2" width="100%" styleClass="tabMensagens">
                         <h:panelGrid columns="1" width="100%" styleClass="tabMensagens" columnClasses="colunaEsquerda">

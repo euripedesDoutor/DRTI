@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:loadBundle var="msg_menu" basename="propriedades.menu"/>
+<h:outputStylesheet src="css/azul.css"/>
+
+
+<p:toolbar itemSeparator="line" width="100%" style="border: 1px;">
+    <p:menu rendered="#{!LoginControle.permissaoAcessoMenuVO.groupCadastros}">
+        <f:facet name="label">
+            <h:panelGroup>
+                <h:outputText rendered="#{!LoginControle.permissaoAcessoMenuVO.groupCadastros}"
+                              styleClass="tituloCamposMenu" value="#{msg_menu.Menu_cadastros}"/>
+                <h:outputText rendered="#{LoginControle.permissaoAcessoMenuVO.groupCadastros}"
+                              styleClass="tituloCamposMenuDesabilitado" value="#{msg_menu.Menu_cadastros}"/>
+            </h:panelGroup>
+        </f:facet>
+        <p:submenu value="#{msg_menu.Menu_basico}"
+                        disabled="#{LoginControle.permissaoAcessoMenuVO.groupCadastrosBasico}">
+            <p:menuItem id="cidade" value="#{msg_menu.Menu_cidade}"
+                           onclick="abrirPopup('cidadeCons.xhtml', 'cidade', 780, 595);"
+                           rendered="#{LoginControle.permissaoAcessoMenuVO.cidade}" submitMode="ajax"/>
+            <p:menuItem id="pais" value="#{msg_menu.Menu_pais}"
+                           onclick="abrirPopup('paisCons.xhtml', 'pais', 780, 595);"
+                           rendered="#{LoginControle.permissaoAcessoMenuVO.pais}" submitMode="ajax"/>
+            <p:menuItem id="empresa" value="#{msg_menu.Menu_empresa}"
+                           onclick="abrirPopup('empresaCons.xhtml', 'Empresa', 780, 595);"
+                           rendered="#{LoginControle.permissaoAcessoMenuVO.empresa && LoginControle.userNameIsAdmin}" submitMode="ajax"/>
+        </p:submenu>
+    </p:menu>
+
+    <p:menu>
+        <f:facet name="label">
+            <h:panelGroup>
+                <h:outputText styleClass="tituloCamposMenu" value="#{msg_menu.Menu_Administrador}"/>
+            </h:panelGroup>
+        </f:facet>
+        <p:menuItem id="configuracaoSistema" value="#{msg_menu.Menu_configuracaoSistema}"
+                       onclick="abrirPopupMaximizada('configuracaoSistemaForm.xhtml', 'ConfiguracaoSistema');"
+                       rendered="#{LoginControle.permissaoAcessoMenuVO.configuracaoSistema}" submitMode="ajax"/>
+        <p:menuItem id="loginUsuario" value="#{msg_menu.Menu_loginUsuario}"
+                       onclick="abrirPopup('loginUsuario.xhtml', 'LoginUsuario', 1050, 900);"
+                       rendered="#{LoginControle.permissaoAcessoMenuVO.loginUsuario}" submitMode="ajax"/>
+        <p:menuItem id="perfilAcesso" value="#{msg_menu.Menu_perfilAcesso}"
+                       onclick="abrirPopup('perfilAcessoCons.xhtml', 'PerfilAcesso', 780, 595);"
+                       rendered="#{LoginControle.permissaoAcessoMenuVO.perfilAcesso}" submitMode="ajax"/>
+        <p:menuItem id="usuario" value="#{msg_menu.Menu_usuario}"
+                       onclick="abrirPopup('usuarioCons.xhtml', 'Usuario', 780, 595);"
+                       rendered="#{LoginControle.permissaoAcessoMenuVO.usuario}" submitMode="ajax"/>
+        <p:menuItem value="#{msg_menu.Menu_mudarSenha}" oncomplete="Richfaces.showModalPanel('panelMudarSenha')" action="#{LoginControle.limparMensagemAlteracaoSenha}" update="formMudarSenha:panelValidacoes"
+                       submitMode="ajax"/>
+    </p:menu>
+    <p:toolbarGroup location="right">
+        <p:menu>
+            <f:facet name="label">
+                <p:commandLink oncomplete="Richfaces.showModalPanel('panelSair')">
+                    <h:outputText styleClass="tituloCamposMenu" value="#{msg_menu.prt_Logout_titulo}"/>
+                </p:commandLink>
+            </f:facet>
+        </p:menu>
+    </p:toolbarGroup>
+</p:toolbar>
+</ui:composition>

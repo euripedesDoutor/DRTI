@@ -1,14 +1,8 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
 
-<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<%@taglib prefix="a4j" uri="http://richfaces.org/a4j"%>
-<%@taglib prefix="rich" uri="http://richfaces.org/rich"%>
 
-<f:view>
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <jsp:include page="loads.jsp"/>
+    <ui:include src="loads.xhtml"/>
     <title>
         <h:outputText value="#{msg_aplic.prt_Entidade_tituloForm}"/>
     </title>
@@ -16,7 +10,7 @@
     <h:panelGrid columns="1" width="100%" cellpadding="0" cellspacing="0">
         <f:facet name="header">
             <f:verbatim>
-                <jsp:include page="topoReduzido.jsp"/>
+                <ui:include src="topoReduzido.xhtml"/>
             </f:verbatim>
         </f:facet>
 
@@ -33,12 +27,12 @@
                         <h:outputText styleClass="tituloCampos" value="#{msg.msg_consultar_por}"/>
                         <h:selectOneMenu styleClass="campos" id="consulta" required="true" value="#{EntidadeControle.controleConsulta.campoConsulta}">
                             <f:selectItems value="#{EntidadeControle.tipoConsultaCombo}" />
-                            <a4j:support event="onchange" reRender="formConsulta"/>
+                            <p:ajax event="onchange" update="formConsulta"/>
                         </h:selectOneMenu>
                         <h:inputText id="valorConsulta" styleClass="campos" value="#{EntidadeControle.controleConsulta.valorConsulta}" rendered="#{EntidadeControle.tipoConsultaOutros}"/>
                         <h:panelGroup id="painelProjeto" rendered="#{EntidadeControle.tipoConsultaProjeto}">
                             <h:inputText onkeypress ="autoTab(this, event);" id="projetoConsulta" size="20"  styleClass="camposObrigatorios" value="#{EntidadeControle.projetoConsulta.nomeApresentar}" />
-                            <rich:suggestionbox
+                            <p:autoComplete
                                 height="100"
                                 width="450"
                                 for="projetoConsulta"
@@ -48,13 +42,13 @@
                                 nothingLabel="Nenhum registro de projeto encontrado"
                                 var="result"
                                 id="projetoSugggestionBoxConsulta">
-                                <a4j:support event="onselect" focus="projetoConsulta"
-                                    reRender="painelProjeto"
+                                <p:ajax event="onselect" focus="projetoConsulta"
+                                    update="painelProjeto"
                                     action="#{EntidadeControle.consultarProjetoPorChavePrimariaTelaConsulta}">
                                     <f:setPropertyActionListener
                                         target="#{EntidadeControle.projetoConsulta}"
                                         value="#{result}" />
-                                </a4j:support>
+                                </p:ajax>
 
                                 <h:column>
                                     <f:facet name="header">
@@ -62,12 +56,12 @@
                                     </f:facet>
                                     <h:outputText value="#{result.nomeApresentar}" />
                                 </h:column>
-                            </rich:suggestionbox>
+                            </p:autoComplete>
                             <h:outputText escape="false" style="font: 7pt verdana, arial, helvetica, sans-serif;" value="<br>&nbsp;&nbsp;&nbsp;Mínimo #{LoginControle.configuracaoEmpresaLogado.quantidadeDigitosAutoComplete} caracteres" />
                         </h:panelGroup>
                         <h:panelGroup id="painelModulo" rendered="#{EntidadeControle.tipoConsultaModulo}">
                             <h:inputText onkeypress ="autoTab(this, event);" id="moduloConsulta" size="20"  styleClass="camposObrigatorios" value="#{EntidadeControle.moduloConsulta.nomeApresentar}" />
-                            <rich:suggestionbox
+                            <p:autoComplete
                                 height="100"
                                 width="450"
                                 for="moduloConsulta"
@@ -77,13 +71,13 @@
                                 nothingLabel="Nenhum registro de modulo encontrado"
                                 var="result"
                                 id="moduloSugggestionBoxConsulta">
-                                <a4j:support event="onselect" focus="moduloConsulta"
-                                    reRender="painelModulo"
+                                <p:ajax event="onselect" focus="moduloConsulta"
+                                    update="painelModulo"
                                     action="#{EntidadeControle.consultarModuloPorChavePrimariaTelaConsulta}">
                                     <f:setPropertyActionListener
                                         target="#{EntidadeControle.moduloConsulta}"
                                         value="#{result}" />
-                                </a4j:support>
+                                </p:ajax>
 
                                 <h:column>
                                     <f:facet name="header">
@@ -91,7 +85,7 @@
                                     </f:facet>
                                     <h:outputText value="#{result.nomeApresentar}" />
                                 </h:column>
-                            </rich:suggestionbox>
+                            </p:autoComplete>
                             <h:outputText escape="false" style="font: 7pt verdana, arial, helvetica, sans-serif;" value="<br>&nbsp;&nbsp;&nbsp;Mínimo #{LoginControle.configuracaoEmpresaLogado.quantidadeDigitosAutoComplete} caracteres" />
                         </h:panelGroup>
                         <h:commandLink styleClass="btn" style="position: relative; top: -3px; width: 120px !important; background: #000044 !important;" id="consultar" action="#{EntidadeControle.consultar}">
@@ -102,37 +96,37 @@
                     </h:panelGrid>
                 </h:panelGrid>
 
-                <rich:dataTable id="items" width="100%" headerClass="consulta" rowClasses="linhaImpar, linhaPar" columnClasses="colunaAlinhamento"
+                <p:dataTable id="items" width="100%" headerClass="consulta" rowClasses="linhaImpar, linhaPar" columnClasses="colunaAlinhamento"
                              value="#{EntidadeControle.listaConsulta}" rows="10" var="entidade">
-                    <rich:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{msg_aplic.prt_Entidade_codigo}"/>
                         </f:facet>
                         <h:commandLink action="#{EntidadeControle.editar}" id="codigo" value="#{entidade.codigo}"/>
-                    </rich:column>
+                    </p:column>
 
-                    <rich:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{msg_aplic.prt_Entidade_nomeApresentar}"/>
                         </f:facet>
                         <h:commandLink action="#{EntidadeControle.editar}" id="nomeApresentar" value="#{entidade.nomeApresentar}"/>
-                    </rich:column>
+                    </p:column>
 
-                    <rich:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{msg_aplic.prt_Entidade_projeto}"/>
                         </f:facet>
                         <h:commandLink action="#{EntidadeControle.editar}" id="projeto" value="#{entidade.projeto.nomeApresentar}"/>
-                    </rich:column>
+                    </p:column>
 
-                    <rich:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{msg_aplic.prt_Entidade_modulo}"/>
                         </f:facet>
                         <h:commandLink action="#{EntidadeControle.editar}" id="modulo" value="#{entidade.modulo.nomeApresentar}"/>
-                    </rich:column>
+                    </p:column>
 
-                    <rich:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{msg_bt.btn_opcoes}"/>
                         </f:facet>
@@ -140,9 +134,9 @@
                             <i class="fas fa-edit fa-lg"></i>
                             <h:outputText value="Editar" escape="false" style="font-size: 10pt;"/>
                         </h:commandLink>
-                    </rich:column>
-                </rich:dataTable>
-                <rich:datascroller align="center" for="formConsulta:items"  id="scResultadoConsulta" />
+                    </p:column>
+                </p:dataTable>
+                <p:dataScroller align="center" for="formConsulta:items"  id="scResultadoConsulta" />
 
                 <h:panelGrid columns="1" width="100%" styleClass="tabMensagens" id="mensagens">
                     <h:panelGrid columns="1" width="100%">

@@ -48,212 +48,212 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>login</from-outcome>
-            <to-view-id>/home.jsp</to-view-id>
+            <to-view-id>/home.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>erroLogin</from-outcome>
-            <to-view-id>/index.jsp</to-view-id>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/empresaForm.jsp</from-view-id>
+        <from-view-id>/empresaForm.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/empresaForm.jsp</to-view-id>
+            <to-view-id>/empresaForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/empresaCons.jsp</to-view-id>
+            <to-view-id>/empresaCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/empresaCons.jsp</from-view-id>
+        <from-view-id>/empresaCons.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/empresaForm.jsp</to-view-id>
+            <to-view-id>/empresaForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/empresaCons.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <description>Navegacao da pagina</description>
-        <from-view-id>/perfilAcessoForm.jsp</from-view-id>
-        <navigation-case>
-            <from-outcome>editar</from-outcome>
-            <to-view-id>/perfilAcessoForm.jsp</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>consultar</from-outcome>
-            <to-view-id>/perfilAcessoCons.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <description>Navegacao da pagina</description>
-        <from-view-id>/perfilAcessoCons.jsp</from-view-id>
-        <navigation-case>
-            <from-outcome>editar</from-outcome>
-            <to-view-id>/perfilAcessoForm.jsp</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>consultar</from-outcome>
-            <to-view-id>/perfilAcessoCons.jsp</to-view-id>
+            <to-view-id>/empresaCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/usuarioForm.jsp</from-view-id>
+        <from-view-id>/perfilAcessoForm.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/usuarioForm.jsp</to-view-id>
+            <to-view-id>/perfilAcessoForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/usuarioCons.jsp</to-view-id>
+            <to-view-id>/perfilAcessoCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/usuarioCons.jsp</from-view-id>
+        <from-view-id>/perfilAcessoCons.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/usuarioForm.jsp</to-view-id>
+            <to-view-id>/perfilAcessoForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/usuarioCons.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <description>Navegacao da pagina</description>
-        <from-view-id>/cidadeForm.jsp</from-view-id>
-        <navigation-case>
-            <from-outcome>editar</from-outcome>
-            <to-view-id>/cidadeForm.jsp</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>consultar</from-outcome>
-            <to-view-id>/cidadeCons.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <description>Navegacao da pagina</description>
-        <from-view-id>/cidadeCons.jsp</from-view-id>
-        <navigation-case>
-            <from-outcome>editar</from-outcome>
-            <to-view-id>/cidadeForm.jsp</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>consultar</from-outcome>
-            <to-view-id>/cidadeCons.jsp</to-view-id>
+            <to-view-id>/perfilAcessoCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/configuracaoSistemaForm.jsp</from-view-id>
+        <from-view-id>/usuarioForm.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/configuracaoSistemaForm.jsp</to-view-id>
+            <to-view-id>/usuarioForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/configuracaoSistemaCons.jsp</to-view-id>
+            <to-view-id>/usuarioCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/configuracaoSistemaCons.jsp</from-view-id>
+        <from-view-id>/usuarioCons.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/configuracaoSistemaForm.jsp</to-view-id>
+            <to-view-id>/usuarioForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/configuracaoSistemaCons.jsp</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
-    <navigation-rule>
-        <description>Navegacao da pagina</description>
-        <from-view-id>/paisCons.jsp</from-view-id>
-        <navigation-case>
-            <from-outcome>editar</from-outcome>
-            <to-view-id>/paisForm.jsp</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>consultar</from-outcome>
-            <to-view-id>/paisCons.jsp</to-view-id>
+            <to-view-id>/usuarioCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/paisForm.jsp</from-view-id>
+        <from-view-id>/cidadeForm.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/paisForm.jsp</to-view-id>
+            <to-view-id>/cidadeForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/paisCons.jsp</to-view-id>
+            <to-view-id>/cidadeCons.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/cidadeCons.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/cidadeForm.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/cidadeCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/projetoForm.jsp</from-view-id>
+        <from-view-id>/configuracaoSistemaForm.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/projetoForm.jsp</to-view-id>
+            <to-view-id>/configuracaoSistemaForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/projetoCons.jsp</to-view-id>
+            <to-view-id>/configuracaoSistemaCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/projetoCons.jsp</from-view-id>
+        <from-view-id>/configuracaoSistemaCons.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/projetoForm.jsp</to-view-id>
+            <to-view-id>/configuracaoSistemaForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/projetoCons.jsp</to-view-id>
+            <to-view-id>/configuracaoSistemaCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/entidadeForm.jsp</from-view-id>
+        <from-view-id>/paisCons.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/entidadeForm.jsp</to-view-id>
+            <to-view-id>/paisForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/entidadeCons.jsp</to-view-id>
+            <to-view-id>/paisCons.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/paisForm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/paisForm.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/paisCons.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/projetoForm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/projetoForm.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/projetoCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <description>Navegacao da pagina</description>
-        <from-view-id>/entidadeCons.jsp</from-view-id>
+        <from-view-id>/projetoCons.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editar</from-outcome>
-            <to-view-id>/entidadeForm.jsp</to-view-id>
+            <to-view-id>/projetoForm.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar</from-outcome>
-            <to-view-id>/entidadeCons.jsp</to-view-id>
+            <to-view-id>/projetoCons.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/entidadeForm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/entidadeForm.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/entidadeCons.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Navegacao da pagina</description>
+        <from-view-id>/entidadeCons.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editar</from-outcome>
+            <to-view-id>/entidadeForm.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar</from-outcome>
+            <to-view-id>/entidadeCons.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
